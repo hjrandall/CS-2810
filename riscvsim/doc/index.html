@@ -1,0 +1,58 @@
+<html><head></head><body><h2>Multiplication extensions</h2>
+
+<p>The base instruction set for RISC-V does not include multiplication
+and division instructions, but these are a common and useful
+extension that we will implement. These instructions are added to
+the existing opcode for ALU instructions and should be implemented
+in <code>execute_alu</code> (in addition to the instructions you have already
+implemented there). See the documentation for details of the
+instruction encodings.</p>
+
+<ul>
+<li><p><code>mul rd, rs1, rs2</code>: “multiply”</p>
+
+<p>Multiply the values in rs1 and rs2 and store the result in rd.
+Note that the result may be bigger than 32 bits, but only the
+least-significant 32 bits are stored. C already works this way
+so you can just implement this as a simple multiply.</p></li>
+
+<li><p><code>mulh rd, rs1, rs2</code>: “multiply high”</p>
+
+<p>Multiply the two values but store only the most-significant 32
+bits. This can be implemented by converting the inputs to 64-bit
+values and capturing the 64-bit result, then shifting it right
+32 times to obtain the final value.</p></li>
+
+<li><p><code>mulhsu rd, rs1, rs2</code>: “multiply high signed unsigned”</p>
+
+<p>Multiply rs1 as a signed 64-bit value and rs2 as an unsigned
+64-bit value and capture the most-significant 32 bits. Use the
+appropriate value types in C to get the correct results.</p></li>
+
+<li><p><code>mulhu rd, rs1, rs2</code>: “multiply high unsigned”</p>
+
+<p>Treat both values as unsigned 64-bit values, multiply, and
+capture the most-significant 32 bits.</p></li>
+
+<li><p><code>div rd, rs1, rs2</code>: “divide”</p>
+
+<p>Divide rs1 by rs2 and store the result in rd.</p></li>
+
+<li><p><code>divu rd, rs1, rs2</code>: “divide unsigned”</p>
+
+<p>Perform division with rs1 and rs2 treated as unsigned values.</p></li>
+
+<li><p><code>rem rd, rs1, rs2</code>: “remainder”</p>
+
+<p>Divide rs1 by rs2 and store the remainder in rd.</p></li>
+
+<li><p><code>remu rd, rs1, rs2</code>: “remainder unsigned”</p>
+
+<p>Capture the remainder but treat rs1 and rs2 as unsigned values.</p></li>
+</ul>
+
+<p>When implementing variants with different bit sizes and unsigned
+operands, you may find it helpful to create variables of the
+appropriate types, copy the values into those variables, and then
+perform the operations.</p>
+</body></html>
